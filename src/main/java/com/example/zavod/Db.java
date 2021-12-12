@@ -7,16 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Db extends Data {
-    Connection dbConnection;
-
-    public Db() {
-    }
+    static Connection dbConnection;
 
     public Connection getDbConnection() throws ClassNotFoundException, SQLException {
-        String connectionString = "jdbc:mysql://" + this.dbHost + ":" + this.dbPort + "/" + this.dbName;
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        this.dbConnection = DriverManager.getConnection(connectionString, this.dbUser, this.dbPass);
-        return this.dbConnection;
+        String connectionString = "jdbc:mysql://" + this.dbHost + ":" + this.dbPort + "/" + this.dbName + "?useSSL=false";
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+        dbConnection = DriverManager.getConnection(connectionString, this.dbUser, this.dbPass);
+        return dbConnection;
     }
 
     public void signUpUser(Users users) {
